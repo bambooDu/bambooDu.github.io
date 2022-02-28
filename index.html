@@ -77,6 +77,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-js-base/回调函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2022-02-24T06:47:05.000Z" itemprop="datePublished">2022-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">回掉函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><code>explain:</code> 回调函数是作为参数传递给另一个函数的函数，在父函数完成后执行。<br><em>回调函数确保：函数在某个任务完成之前不运行，在任务完成之后立即运行。它帮助我们编写异步 JavaScript 代码，避免问题和错误。</em> &gt; <strong>回调与同步、异步并没有直接的联系，回调只是一种实现方式，既可以有同步回调，也可以有异步回调，还可以有事件处理回调和延迟函数回调，这些在我们工作中有很多的使用场景</strong></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params">msg, callback</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 同步回调</span></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;kk:&#x27;</span>, msg)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (<span class="keyword">typeof</span> callback == <span class="string">&#x27;function&#x27;</span>) <span class="title function_">callback</span>()</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">doSomething</span>(<span class="string">&#x27;回调函数啊&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">alert</span>(<span class="string">&#x27;匿名函数实现回调&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// $.get(&#x27;ajax/test.html&#x27;, function(data)&#123;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     // 异步请求的回调函数</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     $(&#x27;#box&#x27;).html(data)</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// &#125;)</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// $(&quot;#myBtn&quot;).click(function()&#123;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     // 点击事件回掉函数</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     console.log(&quot;click my Btn&quot;);</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// &#125;)</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">/*</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   * 使用this对象的回调函数（this指向问题）；保证 调用回掉函数的 调用对象的 this对象上下文</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   * 函数调用判断this的个人参考：</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   *   1：this的指向是在函数执行的时候确定的，函数定义时是不确定的。实际上this始终指向那个调用它的对象</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   *   2：调用执行函数时，“.” 前是什么，this一般就是什么，前面无对象一般就是window</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   *  下面的callback调用是在getUserInput的作用域内，而这个作用域的this指向window。可以使用call apply bind改变this指向。</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   */</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> clientData = &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">id</span>: <span class="number">096545</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">fullName</span>: <span class="string">&#x27;Not Set&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//setUsrName是一个在clientData对象中的方法</span></span></span><br><span class="line"><span class="language-javascript">    <span class="attr">setUserName</span>: <span class="keyword">function</span> (<span class="params">firstName, lastName</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.<span class="property">fullName</span> = firstName + <span class="string">&#x27; &#x27;</span> + lastName</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">getUserInput</span>(<span class="params">firstName, lastName, callback</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//code .....</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//调用回调函数存储</span></span></span><br><span class="line"><span class="language-javascript">    callback.<span class="title function_">call</span>(<span class="literal">null</span>, firstName, lastName)</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">getUserInput</span>(<span class="string">&#x27;Barack&#x27;</span>, <span class="string">&#x27;Obama&#x27;</span>, clientData.<span class="property">setUserName</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(clientData.<span class="property">fullName</span>) <span class="comment">//Not Set</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">fullName</span>) <span class="comment">//Barack Obama</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" data-id="cl06a627y0002zovhg1bteyyr" data-title="回掉函数" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Function/" rel="tag">Function</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-js-base/构造函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/02/24/js-base/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="article-date">
@@ -128,55 +172,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/24/js-base/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" data-id="cl00t3pqs00020kvh8cffcqjp" data-title="构造函数 实例对象 this" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/24/js-base/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" data-id="cl06a62810004zovh4fom8ck5" data-title="构造函数 实例对象 this" class="article-share-link">Share</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Function-this%E5%85%B3%E9%94%AE%E5%AD%97/" rel="tag">Function,this关键字</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-js-base/回调函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="article-date">
-  <time class="dt-published" datetime="2022-02-24T06:47:05.000Z" itemprop="datePublished">2022-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">回掉函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><code>explain:</code> 回调函数是作为参数传递给另一个函数的函数，在父函数完成后执行。<br><em>回调函数确保：函数在某个任务完成之前不运行，在任务完成之后立即运行。它帮助我们编写异步 JavaScript 代码，避免问题和错误。</em> &gt; <strong>回调与同步、异步并没有直接的联系，回调只是一种实现方式，既可以有同步回调，也可以有异步回调，还可以有事件处理回调和延迟函数回调，这些在我们工作中有很多的使用场景</strong></p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">doSomething</span>(<span class="params">msg, callback</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 同步回调</span></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;kk:&#x27;</span>, msg)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (<span class="keyword">typeof</span> callback == <span class="string">&#x27;function&#x27;</span>) <span class="title function_">callback</span>()</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">doSomething</span>(<span class="string">&#x27;回调函数啊&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">alert</span>(<span class="string">&#x27;匿名函数实现回调&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">  &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// $.get(&#x27;ajax/test.html&#x27;, function(data)&#123;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     // 异步请求的回调函数</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     $(&#x27;#box&#x27;).html(data)</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// &#125;)</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// $(&quot;#myBtn&quot;).click(function()&#123;</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     // 点击事件回掉函数</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">//     console.log(&quot;click my Btn&quot;);</span></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// &#125;)</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">/*</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   * 使用this对象的回调函数（this指向问题）；保证 调用回掉函数的 调用对象的 this对象上下文</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   * 函数调用判断this的个人参考：</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   *   1：this的指向是在函数执行的时候确定的，函数定义时是不确定的。实际上this始终指向那个调用它的对象</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   *   2：调用执行函数时，“.” 前是什么，this一般就是什么，前面无对象一般就是window</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   *  下面的callback调用是在getUserInput的作用域内，而这个作用域的this指向window。可以使用call apply bind改变this指向。</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">   */</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> clientData = &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">id</span>: <span class="number">096545</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">fullName</span>: <span class="string">&#x27;Not Set&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//setUsrName是一个在clientData对象中的方法</span></span></span><br><span class="line"><span class="language-javascript">    <span class="attr">setUserName</span>: <span class="keyword">function</span> (<span class="params">firstName, lastName</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">this</span>.<span class="property">fullName</span> = firstName + <span class="string">&#x27; &#x27;</span> + lastName</span></span><br><span class="line"><span class="language-javascript">    &#125;,</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">getUserInput</span>(<span class="params">firstName, lastName, callback</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//code .....</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//调用回调函数存储</span></span></span><br><span class="line"><span class="language-javascript">    callback.<span class="title function_">call</span>(<span class="literal">null</span>, firstName, lastName)</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="title function_">getUserInput</span>(<span class="string">&#x27;Barack&#x27;</span>, <span class="string">&#x27;Obama&#x27;</span>, clientData.<span class="property">setUserName</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(clientData.<span class="property">fullName</span>) <span class="comment">//Not Set</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">fullName</span>) <span class="comment">//Barack Obama</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" data-id="cl00t3pqx00070kvh677dabcc" data-title="回掉函数" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Function/" rel="tag">Function</a></li></ul>
 
     </footer>
   </div>
@@ -221,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/23/project-problem/nuxt-h5/" data-id="cl00t3pqv00040kvhap0s32fr" data-title="坑坑高" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/23/project-problem/nuxt-h5/" data-id="cl06a62840009zovh6w6rhq3q" data-title="坑坑高" class="article-share-link">Share</a>
       
       
       
@@ -303,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/16/MY-VUE/base/base/" data-id="cl00t3pr3000g0kvh2d707hjd" data-title="简便vue基础" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/16/MY-VUE/base/base/" data-id="cl06a6288000gzovhcx6h2jvi" data-title="简便vue基础" class="article-share-link">Share</a>
       
       
       
@@ -341,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/15/English/lean/" data-id="cl00t3pqp00010kvhc249c27k" data-title="english" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/15/English/lean/" data-id="cl06a627v0001zovh43sp2xuh" data-title="english" class="article-share-link">Share</a>
       
       
       
@@ -455,7 +455,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/15/scss-guide/primer/" data-id="cl00t3pqz000a0kvh5f8xd6w8" data-title="sass 入门" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/15/scss-guide/primer/" data-id="cl06a62830006zovheskb9mhq" data-title="sass 入门" class="article-share-link">Share</a>
       
       
       
@@ -499,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/15/vue2-to-vue3/first-webpack/" data-id="cl00t3pr1000e0kvhdwlm5bz4" data-title="webpack基础入门" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/15/vue2-to-vue3/first-webpack/" data-id="cl06a6287000dzovh9aoi7tum" data-title="webpack基础入门" class="article-share-link">Share</a>
       
       
       
@@ -601,7 +601,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/14/start-guide/feb20220214/" data-id="cl00t3pqw00050kvh93dte2s9" data-title="第一次尝试" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/14/start-guide/feb20220214/" data-id="cl06a62820005zovha0tz85ob" data-title="第一次尝试" class="article-share-link">Share</a>
       
       
       
@@ -654,7 +654,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/14/start-guide/hello-world/" data-id="cl00t3pr0000b0kvhapxj7q0q" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/14/start-guide/hello-world/" data-id="cl06a6285000bzovhhagr9oxl" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -718,11 +718,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit 
       <ul>
         
           <li>
-            <a href="/2022/02/24/js-base/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">构造函数 实例对象 this</a>
+            <a href="/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">回掉函数</a>
           </li>
         
           <li>
-            <a href="/2022/02/24/js-base/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">回掉函数</a>
+            <a href="/2022/02/24/js-base/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">构造函数 实例对象 this</a>
           </li>
         
           <li>
